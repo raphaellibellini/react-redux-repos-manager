@@ -16,7 +16,7 @@ function reducer(state = INITIAL_STATE, action) {
     if (action.type === 'ADD_REPO') {
         return {
             ...state,
-            repo: action.payload
+            repositories: state.repositories.concat(action.payload)
         }
     }
 
