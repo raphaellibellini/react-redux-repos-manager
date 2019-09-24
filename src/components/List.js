@@ -1,12 +1,19 @@
 import React from 'react';
 import Repository from './Repository';
+import { connect } from 'react-redux';
 
-const List = () => {
+const List = ({ repositories }) => {
     return (
         <ul className='repo-list'>
-            <Repository />
+            {repositories.map((repo, index) => (
+                <Repository key={index} repo={repo} />
+            ))}
         </ul>
     )
 }
 
-export default List;
+const mapStateToProps = state => ({
+    repositories: state.repositories
+});
+
+export default connect(mapStateToProps)(List);

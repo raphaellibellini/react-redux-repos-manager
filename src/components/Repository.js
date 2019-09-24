@@ -3,25 +3,28 @@ import { Grid } from 'semantic-ui-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSyncAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
-const Repository = () => {
+const Repository = (props) => {
+    const { repo, removeRepository, updateRepository } = props;
+    console.log(repo)
+
     return (
         <li>
             <Grid className='repo-component'>
                 <Grid.Row>
                     <Grid.Column textAlign='center'>
-                        <p>IMAGEM</p>
+                        <img src={repo.owner.avatar_url} className='repo-icon' alt='Logo do repositório'></img>
                     </Grid.Column>
                 </Grid.Row>
 
                 <Grid.Row>
                     <Grid.Column textAlign='center'>
-                        <h1 className='repo-name'>Repo name</h1>
+                        <h1 className='repo-name'>{repo.name}</h1>
                     </Grid.Column>
                 </Grid.Row>
 
                 <Grid.Row>
                     <Grid.Column textAlign='center'>
-                        <h2 className='repo-subtitle'>Facebook</h2>
+                        <h2 className='repo-subtitle'>{repo.owner.login}</h2>
                     </Grid.Column>
                 </Grid.Row>
 
@@ -30,7 +33,7 @@ const Repository = () => {
                         Stars
                     </Grid.Column>
                     <Grid.Column width={8} textAlign='right'>
-                        151512
+                        {repo.stargazers_count}
                     </Grid.Column>
                 </Grid.Row>
 
@@ -39,7 +42,7 @@ const Repository = () => {
                         Language
                     </Grid.Column>
                     <Grid.Column width={8} textAlign='right'>
-                        JS
+                        {repo.language}
                     </Grid.Column>
                 </Grid.Row>
 
@@ -48,7 +51,7 @@ const Repository = () => {
                         Forks
                     </Grid.Column>
                     <Grid.Column width={8} textAlign='right'>
-                        444
+                        {repo.forks}
                     </Grid.Column>
                 </Grid.Row>
 
