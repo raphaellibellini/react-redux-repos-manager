@@ -20,6 +20,15 @@ function reducer(state = INITIAL_STATE, action) {
         }
     }
 
+    if (action.type === 'DELETE_REPO') {
+        return {
+            ...state,
+            repositories: state.repositories.filter((r) => {
+                return r.id !== action.payload.id;
+            })
+        }
+    }
+
     return state;
 }
 

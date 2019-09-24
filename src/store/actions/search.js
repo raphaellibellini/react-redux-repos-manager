@@ -12,3 +12,10 @@ export function addRepo(repo) {
         payload: repo
     }
 }
+
+export function deleteRepo(repo) {
+    return {
+        type: 'DELETE_REPO',
+        payload: repo
+    }
+}

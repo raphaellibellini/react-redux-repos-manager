@@ -5,7 +5,6 @@ import * as RepoActions from '../store/actions/search';
 import api from '../services/api';
 
 class Search extends Component {
-
     addRepository = async () => {
         try {
             const error = document.querySelector('.error');
@@ -35,19 +34,6 @@ class Search extends Component {
                     forks
                 })
             }))
-    
-            
-            this.setState({
-              repositories: [...this.state.repositories, {
-                id,
-                avatar_url,
-                name,
-                login,
-                stargazers_count,
-                language,
-                forks
-              }]
-            });
             */
 
         } catch {
