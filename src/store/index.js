@@ -13,6 +13,13 @@ function reducer(state = INITIAL_STATE, action) {
         }
     }
 
+    if (action.type === 'ADD_REPO') {
+        return {
+            ...state,
+            repo: action.payload
+        }
+    }
+
     return state;
 }
 

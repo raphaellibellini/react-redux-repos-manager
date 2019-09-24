@@ -3,6 +3,7 @@ import { Grid, Segment, Input, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import * as RepoActions from '../store/actions/search'
 
+
 const Search = ({ query, dispatch }) => (
     <Grid className='search-component'>
         <Grid.Row columns={1}>

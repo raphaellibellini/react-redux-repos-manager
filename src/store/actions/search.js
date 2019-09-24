@@ -5,3 +5,10 @@ export function updateQuery(query) {
         payload: query
     }
 }
+
+export function addRepo(repo) {
+    return {
+        type: 'ADD_REPO',
+        payload: repo
+    }
+}
