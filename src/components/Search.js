@@ -1,16 +1,9 @@
 import React from 'react';
 import { Grid, Segment, Input, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import * as RepoActions from '../store/actions/search'
 
-function updateQuery(query) {
-    console.log(query)
-    return {
-        type: 'UPDATE_QUERY',
-        payload: query
-    }
-}
-
-const Search = ({ query }) => (
+const Search = ({ query, dispatch }) => (
     <Grid className='search-component'>
         <Grid.Row columns={1}>
             <Grid.Column>
@@ -37,7 +30,7 @@ const Search = ({ query }) => (
                     className='search-bar'
                     type='text'
                     value={query.value}
-                    onChange={(evt) => updateQuery(evt.target.value)}
+                    onChange={(evt) => dispatch(RepoActions.updateQuery(evt.target.value))}
                 />
             </Grid.Column>
             <Grid.Column width={4}>
