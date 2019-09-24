@@ -28,12 +28,10 @@ function Search() {
                         focus
                         className='search-bar'
                         type='text'
-                        value={}
-                        onChange={}
                     />
                 </Grid.Column>
                 <Grid.Column width={4}>
-                    <Button color='purple' className='search-button' onClick={}>ADD</Button>
+                    <Button color='purple' className='search-button'>ADD</Button>
                 </Grid.Column>
             </Grid.Row>
         </Grid>
