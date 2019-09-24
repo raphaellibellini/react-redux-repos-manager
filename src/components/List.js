@@ -1,11 +1,10 @@
 import React from 'react';
+import Repository from './Repository';
 
 const List = () => {
     return (
         <ul className='repo-list'>
-            <li>repo</li>
-            <li>repo</li>
-            <li>repo</li>
+            <Repository />
         </ul>
     )
 }
