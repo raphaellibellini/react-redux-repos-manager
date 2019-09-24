@@ -6,6 +6,13 @@ const INITIAL_STATE = {
 }
 
 function reducer(state = INITIAL_STATE, action) {
+    if (action.type === 'UPDATE_QUERY') {
+        return {
+            ...state,
+            query: action.payload
+        }
+    }
+
     return state;
 }
 
