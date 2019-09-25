@@ -20,7 +20,7 @@ class Search extends Component {
                 return;
             }
 
-            this.props.dispatch(RepoActions.addRepo(repo));
+            this.props.addRepo(repo);
 
             /*
             this.setState((currentState) => ({
@@ -70,7 +70,7 @@ class Search extends Component {
                             className='search-bar'
                             type='text'
                             value={this.props.query}
-                            onChange={(evt) => this.props.dispatch(RepoActions.updateQuery(evt.target.value))}
+                            onChange={(evt) => this.props.updateQuery(evt.target.value)}
                         />
                     </Grid.Column>
                     <Grid.Column width={4}>
@@ -87,4 +87,11 @@ const mapStateToProps = state => ({
     repositories: state.repositories
 });
 
-export default connect(mapStateToProps)(Search);
+const mapDispatchToProps = dispatch => {
+    return {
+        addRepo: (repo) => dispatch(RepoActions.addRepo(repo)),
+        updateQuery: (query) => dispatch(RepoActions.updateQuery(query))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
