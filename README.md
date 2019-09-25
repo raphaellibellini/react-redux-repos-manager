@@ -1,4 +1,4 @@
-# GutHub Repository Manager
+# GitHub Repository Manager
 
 A GitHub API based application that allows you to add, remove and update repositories.
 This app was developed using React and Redux.
