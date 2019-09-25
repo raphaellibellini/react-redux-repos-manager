@@ -5,6 +5,7 @@ import { faSyncAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import * as RepoActions from '../store/actions/search';
 import { connect } from 'react-redux';
 import api from '../services/api';
+import { bindActionCreators } from 'redux';
 
 class Repository extends Component {
     updateRepository = async (repo) => {
@@ -89,11 +90,13 @@ class Repository extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(RepoActions, dispatch);
+/*
     return {
         deleteRepo: (repo) => dispatch(RepoActions.deleteRepo(repo)),
         updateRepo: (repo) => dispatch(RepoActions.updateRepo(repo))
     }
-}
+*/
 
 export default connect(null, mapDispatchToProps)(Repository);

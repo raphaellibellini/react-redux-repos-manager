@@ -5,6 +5,7 @@ import * as RepoActions from '../store/actions/search';
 import api from '../services/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { bindActionCreators } from 'redux';
 
 class Search extends Component {
     addRepository = async () => {
@@ -93,11 +94,14 @@ const mapStateToProps = state => ({
     repositories: state.repositories
 });
 
-const mapDispatchToProps = dispatch => {
-    return {
-        addRepo: (repo) => dispatch(RepoActions.addRepo(repo)),
-        updateQuery: (query) => dispatch(RepoActions.updateQuery(query))
-    }
-};
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(RepoActions, dispatch);
+
+/*    
+return {
+    addRepo: (repo) => dispatch(RepoActions.addRepo(repo)),
+    updateQuery: (query) => dispatch(RepoActions.updateQuery(query))
+}
+*/
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
