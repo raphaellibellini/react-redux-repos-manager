@@ -19,3 +19,10 @@ export function deleteRepo(repo) {
         payload: repo
     }
 }
+
+export function updateRepo(repo) {
+    return {
+        type: 'UPDATE_REPO',
+        payload: repo
+    }
+}

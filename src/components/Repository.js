@@ -4,10 +4,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSyncAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import * as RepoActions from '../store/actions/search';
 import { connect } from 'react-redux';
+import api from '../services/api';
 
 class Repository extends Component {
+    updateRepository = async (repo) => {
+        const resp = await api.get(`/repos/${repo.owner.login}/${repo.name}`);
+
+        const { id, owner: { avatar_url, login }, name, stargazers_count, language, forks } = resp.data;
+        repo = { id, owner: { avatar_url, login }, name, stargazers_count, language, forks };
+
+        this.props.updateRepo(repo);
+
+        /*
+        let newRepositories = this.state.repositories.map(r => (
+            r.id === repo.id ? repo : r
+        ))
+
+        this.setState({ repositories: newRepositories })
+        */
+    }
+
     render() {
-        const { repo, removeRepository, updateRepository } = this.props;
+        const { repo } = this.props;
 
         return (
             <li>
@@ -59,7 +77,7 @@ class Repository extends Component {
 
                     <Grid.Row className='repo-icons'>
                         <Grid.Column width={16} textAlign='right'>
-                            <FontAwesomeIcon icon={faSyncAlt} size='2x' color='green' className='icon' />
+                            <FontAwesomeIcon icon={faSyncAlt} size='2x' color='green' className='icon' onClick={() => this.updateRepository(repo)} />
                             <FontAwesomeIcon icon={faTrashAlt} size='2x' onClick={() => this.props.deleteRepo(repo)} />
                         </Grid.Column>
                     </Grid.Row>
@@ -71,7 +89,8 @@ class Repository extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        deleteRepo: (repo) => dispatch(RepoActions.deleteRepo(repo))
+        deleteRepo: (repo) => dispatch(RepoActions.deleteRepo(repo)),
+        updateRepo: (repo) => dispatch(RepoActions.updateRepo(repo))
     }
 }
 

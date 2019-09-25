@@ -29,6 +29,15 @@ function reducer(state = INITIAL_STATE, action) {
         }
     }
 
+    if (action.type === 'UPDATE_REPO') {
+        return {
+            ...state,
+            repositories: state.repositories.map(r => (
+                r.id === action.payload.id ? action.payload : r
+            ))
+        }
+    }
+
     return state;
 }
 
