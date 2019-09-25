@@ -13,7 +13,7 @@ const List = ({ repositories }) => {
 }
 
 const mapStateToProps = state => ({
-    repositories: state.repositories
+    repositories: state.repos.repositories
 });
 
 export default connect(mapStateToProps)(List);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Segment, Input, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import * as RepoActions from '../store/actions/search';
+import * as RepoActions from '../store/actions/repos';
 import api from '../services/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -90,8 +90,8 @@ class Search extends Component {
 }
 
 const mapStateToProps = state => ({
-    query: state.query,
-    repositories: state.repositories
+    query: state.repos.query,
+    repositories: state.repos.repositories
 });
 
 const mapDispatchToProps = dispatch =>
