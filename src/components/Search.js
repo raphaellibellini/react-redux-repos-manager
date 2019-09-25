@@ -8,21 +8,23 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 class Search extends Component {
     addRepository = async () => {
+        const { query, repositories, addRepo } = this.props;
+
         try {
             const error = document.querySelector('.error');
             error.style.display = 'none';
 
-            const resp = await api.get(`/repos/${this.props.query}`);
+            const resp = await api.get(`/repos/${query}`);
 
             const { id, owner: { avatar_url, login }, name, stargazers_count, language, forks } = resp.data;
             let repo = { id, owner: { avatar_url, login }, name, stargazers_count, language, forks };
 
-            let found = this.props.repositories.find(r => r.id === repo.id);
+            let found = repositories.find(r => r.id === repo.id);
             if (found !== undefined) {
                 return;
             }
 
-            this.props.addRepo(repo);
+            addRepo(repo);
 
             /*
             this.setState((currentState) => ({
@@ -45,6 +47,8 @@ class Search extends Component {
     }
 
     render() {
+        const { query, repositories, updateQuery } = this.props;
+
         return (
             <Grid className='search-component'>
                 <Grid.Row columns={1}>
@@ -61,7 +65,7 @@ class Search extends Component {
                         Repositórios
                     </Grid.Column>
                     <Grid.Column width={1} textAlign='right'>
-                        {this.props.repositories.length}
+                        {repositories.length}
                     </Grid.Column>
                 </Grid.Row>
 
@@ -71,8 +75,8 @@ class Search extends Component {
                             focus
                             className='search-bar'
                             type='text'
-                            value={this.props.query}
-                            onChange={(evt) => this.props.updateQuery(evt.target.value)}
+                            value={query}
+                            onChange={(evt) => updateQuery(evt.target.value)}
                         />
                     </Grid.Column>
                     <Grid.Column width={4}>

@@ -8,12 +8,14 @@ import api from '../services/api';
 
 class Repository extends Component {
     updateRepository = async (repo) => {
+        const { updateRepo } = this.props;
+
         const resp = await api.get(`/repos/${repo.owner.login}/${repo.name}`);
 
         const { id, owner: { avatar_url, login }, name, stargazers_count, language, forks } = resp.data;
         repo = { id, owner: { avatar_url, login }, name, stargazers_count, language, forks };
 
-        this.props.updateRepo(repo);
+        updateRepo(repo);
 
         /*
         let newRepositories = this.state.repositories.map(r => (
@@ -25,7 +27,7 @@ class Repository extends Component {
     }
 
     render() {
-        const { repo } = this.props;
+        const { repo, deleteRepo } = this.props;
 
         return (
             <li>
@@ -78,7 +80,7 @@ class Repository extends Component {
                     <Grid.Row className='repo-icons'>
                         <Grid.Column width={16} textAlign='right'>
                             <FontAwesomeIcon icon={faSyncAlt} size='2x' color='green' className='icon' onClick={() => this.updateRepository(repo)} />
-                            <FontAwesomeIcon icon={faTrashAlt} size='2x' onClick={() => this.props.deleteRepo(repo)} />
+                            <FontAwesomeIcon icon={faTrashAlt} size='2x' onClick={() => deleteRepo(repo)} />
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
