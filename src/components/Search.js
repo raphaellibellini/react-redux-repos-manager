@@ -3,6 +3,8 @@ import { Grid, Segment, Input, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import * as RepoActions from '../store/actions/search';
 import api from '../services/api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 class Search extends Component {
     addRepository = async () => {
@@ -53,9 +55,9 @@ class Search extends Component {
 
                 <Grid.Row columns={3} verticalAlign='middle' className='search-header'>
                     <Grid.Column width={2}>
-                        <img alt='Logo do Github' src="https://img.icons8.com/ios-glyphs/60/000000/github.png"></img>
+                        <FontAwesomeIcon icon={faGithub} color='black' size='2x' className='github-icon' />
                     </Grid.Column>
-                    <Grid.Column width={12}>
+                    <Grid.Column width={11} className='search-title'>
                         Repositórios
                     </Grid.Column>
                     <Grid.Column width={1} textAlign='right'>

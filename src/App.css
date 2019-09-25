@@ -37,6 +37,10 @@ body {
   font-size: 28px;
 }
 
+.search-title {
+  margin-left: 20px;
+}
+
 .search-bar {
   width: 100%;
 }
@@ -87,3 +91,4 @@ body {
 .icon {
   margin: 0 10px;
 }
+
