@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Segment, Input, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import * as RepoActions from '../store/actions/repos';
+import { Creators as RepoActions } from '../store/ducks/repos';
 import api from '../services/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';

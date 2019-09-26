@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSyncAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import * as RepoActions from '../store/actions/repos';
+import { Creators as RepoActions } from '../store/ducks/repos';
 import { connect } from 'react-redux';
 import api from '../services/api';
 import { bindActionCreators } from 'redux';
