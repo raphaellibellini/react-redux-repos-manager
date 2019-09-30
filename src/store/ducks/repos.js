@@ -7,7 +7,9 @@ export const Types = {
 
 const INITIAL_STATE = {
     query: '',
-    repositories: []
+    repositories: [],
+    loading: false,
+    error: false
 }
 
 function repos(state = INITIAL_STATE, action) {
@@ -18,10 +20,35 @@ function repos(state = INITIAL_STATE, action) {
         }
     }
 
+    /*
     if (action.type === Types.ADD_REPO) {
         return {
             ...state,
             repositories: state.repositories.concat(action.payload)
+        }
+    }
+    */
+
+    if (action.type === 'REQUEST_REPO') {
+        return {
+            ...state,
+            loading: true
+        }
+    }
+
+    if (action.type === 'SUCCESS_REPO') {
+        return {
+            repositories: state.repositories.concat(action.payload),
+            loading: false,
+            error: false
+        }
+    }
+
+    if (action.type === 'FAILURE_REPO') {
+        return {
+            repositories: [],
+            loading: false,
+            error: true
         }
     }
 
@@ -55,10 +82,16 @@ export const Creators = {
         payload: query
     }),
 
+    /*
     addRepo: repo => ({
         type: Types.ADD_REPO,
         payload: repo
+    }),
+    */
 
+    requestRepo: (query) => ({
+        type: 'REQUEST_REPO',
+        payload: query
     }),
 
     deleteRepo: repo => ({

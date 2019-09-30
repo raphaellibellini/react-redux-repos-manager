@@ -8,6 +8,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { bindActionCreators } from 'redux';
 
 class Search extends Component {
+    /*
     addRepository = async () => {
         const { query, repositories, addRepo } = this.props;
 
@@ -27,7 +28,7 @@ class Search extends Component {
 
             addRepo(repo);
 
-            /*
+            
             this.setState((currentState) => ({
                 repositories: currentState.repositories.concat({
                     id,
@@ -39,16 +40,17 @@ class Search extends Component {
                     forks
                 })
             }))
-            */
+            
 
         } catch {
             const error = document.querySelector('.error');
             error.style.display = 'block';
         }
     }
+    */
 
     render() {
-        const { query, repositories, updateQuery } = this.props;
+        const { query, repositories, updateQuery, requestRepo } = this.props;
 
         return (
             <Grid className='search-component'>
@@ -81,7 +83,7 @@ class Search extends Component {
                         />
                     </Grid.Column>
                     <Grid.Column width={4}>
-                        <Button color='purple' className='search-button' onClick={this.addRepository}>ADD</Button>
+                        <Button color='purple' className='search-button' onClick={() => requestRepo(query)}>ADD</Button>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
