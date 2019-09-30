@@ -17,7 +17,6 @@ const List = ({ repositories, loading }) => {
                 ))}
             </ul>
         </div>
-
     )
 }
 

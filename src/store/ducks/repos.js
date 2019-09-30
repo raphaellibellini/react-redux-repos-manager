@@ -37,7 +37,9 @@ function repos(state = INITIAL_STATE, action) {
     }
 
     if (action.type === 'SUCCESS_REPO') {
+        debugger;
         return {
+            ...state,
             repositories: state.repositories.concat(action.payload),
             loading: false,
             error: false
@@ -45,8 +47,9 @@ function repos(state = INITIAL_STATE, action) {
     }
 
     if (action.type === 'FAILURE_REPO') {
+        debugger;
         return {
-            repositories: [],
+            ...state,
             loading: false,
             error: true
         }
@@ -89,7 +92,7 @@ export const Creators = {
     }),
     */
 
-    requestRepo: (query) => ({
+    requestRepo: query => ({
         type: 'REQUEST_REPO',
         payload: query
     }),
