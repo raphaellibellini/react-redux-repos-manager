@@ -1,5 +1,6 @@
 import { takeLatest, put, all, select } from 'redux-saga/effects';
 import api from '../services/api';
+import { Types } from './ducks/repos';
 
 function* getRepo(action) {
     try {
@@ -17,12 +18,12 @@ function* getRepo(action) {
         let found = repositories.find(r => r.id === repo.id);
         if (found !== undefined) {
             yield put({
-                type: 'FAILURE_REPO',
+                type: Types.FAILURE_ADD_REPO,
                 error: 'Não é permitido adicionar repositórios repetidos!'
             })
         } else {
             yield put({
-                type: 'SUCCESS_REPO',
+                type: Types.SUCCESS_ADD_REPO,
                 payload: repo
             })
         }
@@ -30,7 +31,7 @@ function* getRepo(action) {
 
     } catch (error) {
         yield put({
-            type: 'FAILURE_REPO',
+            type: Types.FAILURE_ADD_REPO,
             error: 'Não foi possível adicionar o repositório!'
         })
     }
@@ -46,20 +47,20 @@ function* updateRepo(action) {
         repo = { id, owner: { avatar_url, login }, name, stargazers_count, language, forks };
 
         yield put({
-            type: 'SUCCESS_UPDATE_REPO',
+            type: Types.SUCCESS_UPDATE_REPO,
             payload: repo
         })
     } catch (error) {
         console.error(error.toString());
         yield put({
-            type: 'FAILURE_UPDATE_REPO'
+            type: Types.FAILURE_UPDATE_REPO
         })
     }
 }
 
 export default function* root() {
     yield all([
-        takeLatest('REQUEST_REPO', getRepo),
-        takeLatest('REQUEST_UPDATE_REPO', updateRepo)
+        takeLatest(Types.REQUEST_ADD_REPO, getRepo),
+        takeLatest(Types.REQUEST_UPDATE_REPO, updateRepo)
     ])
 }

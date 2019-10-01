@@ -1,7 +1,11 @@
 export const Types = {
     UPDATE_QUERY: 'repos/UPDATE_QUERY',
-    ADD_REPO: 'repos/ADD_REPO',
-    UPDATE_REPO: 'repos/UPDATE_REPO',
+    REQUEST_ADD_REPO: 'repos/REQUEST_ADD_REPO',
+    SUCCESS_ADD_REPO: 'repos/SUCCESS_ADD_REPO',
+    FAILURE_ADD_REPO: 'repo/FAILURE_ADD_REPO',
+    REQUEST_UPDATE_REPO: 'repos/REQUEST_UPDATE_REPO',
+    SUCCESS_UPDATE_REPO: 'repos/SUCCESS_UPDATE_REPO',
+    FAILURE_UPDATE_REPO: 'repos/FAILURE_UPDATE_REPO',
     DELETE_REPO: 'repos/DELETE_REPO'
 }
 
@@ -29,7 +33,7 @@ function repos(state = INITIAL_STATE, action) {
     }
     */
 
-    if (action.type === 'REQUEST_REPO') {
+    if (action.type === Types.REQUEST_ADD_REPO) {
         return {
             ...state,
             loading: true,
@@ -37,7 +41,7 @@ function repos(state = INITIAL_STATE, action) {
         }
     }
 
-    if (action.type === 'SUCCESS_REPO') {
+    if (action.type === Types.SUCCESS_ADD_REPO) {
         return {
             ...state,
             repositories: state.repositories.concat(action.payload),
@@ -46,10 +50,11 @@ function repos(state = INITIAL_STATE, action) {
         }
     }
 
-    if (action.type === 'FAILURE_REPO') {
+    if (action.type === Types.FAILURE_ADD_REPO) {
         return {
             ...state,
-            loading: false
+            loading: false,
+            error: action.error
         }
     }
 
@@ -73,7 +78,7 @@ function repos(state = INITIAL_STATE, action) {
     }
     */
 
-    if (action.type === 'REQUEST_UPDATE_REPO') {
+    if (action.type === Types.REQUEST_UPDATE_REPO) {
         return {
             ...state,
             loading: true,
@@ -81,7 +86,7 @@ function repos(state = INITIAL_STATE, action) {
         }
     }
 
-    if (action.type === 'SUCCESS_UPDATE_REPO') {
+    if (action.type === Types.SUCCESS_UPDATE_REPO) {
         return {
             ...state,
             repositories: state.repositories.map(r => (
@@ -91,11 +96,10 @@ function repos(state = INITIAL_STATE, action) {
         }
     }
 
-    if (action.type === 'FAILURE_UPDATE_REPO') {
+    if (action.type === Types.FAILURE_UPDATE_REPO) {
         return {
             ...state,
-            loading: false,
-            error: action.error
+            loading: false
         }
     }
 
@@ -119,7 +123,7 @@ export const Creators = {
     */
 
     requestRepo: query => ({
-        type: 'REQUEST_REPO',
+        type: Types.REQUEST_ADD_REPO,
         payload: query
     }),
 
@@ -136,7 +140,7 @@ export const Creators = {
     */
 
     requestUpdateRepo: repo => ({
-        type: 'REQUEST_UPDATE_REPO',
+        type: Types.REQUEST_UPDATE_REPO,
         payload: repo
     })
 }
