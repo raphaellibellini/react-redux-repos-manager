@@ -10,7 +10,7 @@ class Main extends Component {
 
         return (
             <div>
-                <Dimmer active={loading}>
+                <Dimmer active={loading} className='dimmer'>
                     <Loader>Loading</Loader>
                 </Dimmer>
                 <Search />
