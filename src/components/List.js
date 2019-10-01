@@ -1,28 +1,19 @@
 import React from 'react';
 import Repository from './Repository';
 import { connect } from 'react-redux';
-import { Dimmer, Loader } from 'semantic-ui-react';
 
-const List = ({ repositories, loading }) => {
-
+const List = ({ repositories }) => {
     return (
-        <div>
-            <Dimmer active={loading} className='dimmer'>
-                <Loader>Loading</Loader>
-
-            </Dimmer>
-            <ul className='repo-list'>
-                {repositories.map((repo, index) => (
-                    <Repository key={index} repo={repo} />
-                ))}
-            </ul>
-        </div>
+        <ul className='repo-list'>
+            {repositories.map((repo, index) => (
+                <Repository key={index} repo={repo} />
+            ))}
+        </ul>
     )
 }
 
 const mapStateToProps = state => ({
-    repositories: state.repos.repositories,
-    loading: state.repos.loading
+    repositories: state.repos.repositories
 });
 
 export default connect(mapStateToProps)(List);
