@@ -16,7 +16,6 @@ function* getRepo(action) {
 
         let found = repositories.find(r => r.id === repo.id);
         if (found !== undefined) {
-            console.log('IGUAL');
             yield put({
                 type: 'FAILURE_REPO'
             })
@@ -35,8 +34,29 @@ function* getRepo(action) {
     }
 }
 
+function* updateRepo(action) {
+    try {
+        let repo = action.payload;
+
+        const resp = yield api.get(`/repos/${repo.owner.login}/${repo.name}`);
+
+        const { id, owner: { avatar_url, login }, name, stargazers_count, language, forks } = resp.data;
+        repo = { id, owner: { avatar_url, login }, name, stargazers_count, language, forks };
+
+        yield put({
+            type: 'SUCCESS_UPDATE_REPO',
+            payload: repo
+        })
+    } catch (error) {
+        yield put({
+            type: 'FAILURE_UPDATE_REPO'
+        })
+    }
+}
+
 export default function* root() {
     yield all([
-        takeLatest('REQUEST_REPO', getRepo)
+        takeLatest('REQUEST_REPO', getRepo),
+        takeLatest('REQUEST_UPDATE_REPO', updateRepo)
     ])
 }

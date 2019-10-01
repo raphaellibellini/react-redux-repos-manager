@@ -37,7 +37,6 @@ function repos(state = INITIAL_STATE, action) {
     }
 
     if (action.type === 'SUCCESS_REPO') {
-        debugger;
         return {
             ...state,
             repositories: state.repositories.concat(action.payload),
@@ -47,7 +46,6 @@ function repos(state = INITIAL_STATE, action) {
     }
 
     if (action.type === 'FAILURE_REPO') {
-        debugger;
         return {
             ...state,
             loading: false,
@@ -64,12 +62,40 @@ function repos(state = INITIAL_STATE, action) {
         }
     }
 
+    /*
     if (action.type === Types.UPDATE_REPO) {
         return {
             ...state,
             repositories: state.repositories.map(r => (
                 r.id === action.payload.id ? action.payload : r
             ))
+        }
+    }
+    */
+
+    if (action.type === 'REQUEST_UPDATE_REPO') {
+        return {
+            ...state,
+            loading: true
+        }
+    }
+
+    if (action.type === 'SUCCESS_UPDATE_REPO') {
+        return {
+            ...state,
+            repositories: state.repositories.map(r => (
+                r.id === action.payload.id ? action.payload : r)),
+            loading: false,
+            error: false
+        }
+    }
+
+    if (action.type === 'FAILURE_UPDATE_REPO') {
+        debugger;
+        return {
+            ...state,
+            loading: false,
+            error: true
         }
     }
 
@@ -102,8 +128,15 @@ export const Creators = {
         payload: repo
     }),
 
+    /*
     updateRepo: repo => ({
         type: Types.UPDATE_REPO,
+        payload: repo
+    })
+    */
+
+    requestUpdateRepo: repo => ({
+        type: 'REQUEST_UPDATE_REPO',
         payload: repo
     })
 }
