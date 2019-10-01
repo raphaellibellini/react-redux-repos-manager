@@ -32,7 +32,8 @@ function repos(state = INITIAL_STATE, action) {
     if (action.type === 'REQUEST_REPO') {
         return {
             ...state,
-            loading: true
+            loading: true,
+            error: false
         }
     }
 
@@ -48,8 +49,7 @@ function repos(state = INITIAL_STATE, action) {
     if (action.type === 'FAILURE_REPO') {
         return {
             ...state,
-            loading: false,
-            error: true
+            loading: false
         }
     }
 
@@ -76,7 +76,8 @@ function repos(state = INITIAL_STATE, action) {
     if (action.type === 'REQUEST_UPDATE_REPO') {
         return {
             ...state,
-            loading: true
+            loading: true,
+            error: false
         }
     }
 
@@ -91,11 +92,10 @@ function repos(state = INITIAL_STATE, action) {
     }
 
     if (action.type === 'FAILURE_UPDATE_REPO') {
-        debugger;
         return {
             ...state,
             loading: false,
-            error: true
+            error: action.error
         }
     }
 

@@ -17,7 +17,8 @@ function* getRepo(action) {
         let found = repositories.find(r => r.id === repo.id);
         if (found !== undefined) {
             yield put({
-                type: 'FAILURE_REPO'
+                type: 'FAILURE_REPO',
+                error: 'Não é permitido adicionar repositórios repetidos!'
             })
         } else {
             yield put({
@@ -29,7 +30,8 @@ function* getRepo(action) {
 
     } catch (error) {
         yield put({
-            type: 'FAILURE_REPO'
+            type: 'FAILURE_REPO',
+            error: 'Não foi possível adicionar o repositório!'
         })
     }
 }
@@ -48,6 +50,7 @@ function* updateRepo(action) {
             payload: repo
         })
     } catch (error) {
+        console.error(error.toString());
         yield put({
             type: 'FAILURE_UPDATE_REPO'
         })

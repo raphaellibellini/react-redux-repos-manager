@@ -6,6 +6,7 @@ import api from '../services/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { bindActionCreators } from 'redux';
+import If from './if';
 
 class Search extends Component {
     /*
@@ -50,13 +51,14 @@ class Search extends Component {
     */
 
     render() {
-        const { query, repositories, updateQuery, requestRepo } = this.props;
-
+        const { query, repositories, updateQuery, requestRepo, error } = this.props;
         return (
             <Grid className='search-component'>
                 <Grid.Row columns={1}>
                     <Grid.Column>
-                        <Segment inverted color='yellow' textAlign='center' className='error'>Não foi possível localizar o repositório solicitado.</Segment>
+                        <If condition={error}>
+                            <Segment inverted color='yellow' textAlign='center' className='error'>{error}</Segment>
+                        </If>
                     </Grid.Column>
                 </Grid.Row>
 
@@ -93,7 +95,8 @@ class Search extends Component {
 
 const mapStateToProps = state => ({
     query: state.repos.query,
-    repositories: state.repos.repositories
+    repositories: state.repos.repositories,
+    error: state.repos.error
 });
 
 const mapDispatchToProps = dispatch =>
